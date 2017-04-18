@@ -1,15 +1,18 @@
 <template>
   <div>
-<vue-side-bar>
-  <side-link :multi="true" title="Menu with links" :active="true">
-    <side-link title="First link"/>
-    <side-link title="Second link"/>
-    <side-link title="Third link"/>
-  </side-link>
+    <vue-side-bar>
 
-  <side-link title="simple link"/>
+      <sidebar-item :menu="true" title="Menu with links" :active="true">
+        <sidebar-item title="First link" @click.native="firstLinkClick"/>
+        <sidebar-item title="Second link"/>
+        <sidebar-item title="Third link"/>
+      </sidebar-item>
 
-</vue-side-bar>
+      <sidebar-item title="Hey there">
+
+      </sidebar-item>
+
+    </vue-side-bar>
 
     <router-view style="text-align: center"></router-view>
   </div>
@@ -18,7 +21,11 @@
 <script>
   export default {
     name: 'app',
-    methods: {}
+    methods: {
+      firstLinkClick () {
+        alert('Hey you clicked me!')
+      }
+    }
   }
 </script>
 <style lang="scss">

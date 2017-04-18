@@ -1,9 +1,9 @@
 <template>
-  <div class="sidebar" data-color="orange">
+  <div class="sidebar" :style="sideBarStyle">
     <div class="logo">
       <a href="#" class="logo-text">
         {{title}}
-    </a>
+      </a>
     </div>
     <div class="logo logo-mini">
       <a href="#" class="logo-text">
@@ -21,13 +21,13 @@
             User
             <b class="caret"></b>
           </a>
-          <div class="collapse" id="collapseExample">
+          <!--<div class="collapse">
             <ul class="nav">
               <li><a href="#">My Profile</a></li>
               <li><a href="#">Edit Profile</a></li>
               <li><a href="#">Settings</a></li>
             </ul>
-          </div>
+          </div>-->
         </div>
       </div>
 
@@ -44,6 +44,29 @@
       title: {
         type: String,
         default: 'Vue sidebar'
+      },
+      color: {
+        type: String,
+        default: '#7f8c8d'
+      },
+      position: {
+        type: String,
+        default: 'left'
+      }
+    },
+    computed: {
+      sideBarStyle () {
+        let styles = {
+          background: this.color
+        }
+        if (this.position === 'right') {
+          styles.right = 0
+          styles.left = 'initial'
+        } else {
+          styles.left = 0
+          styles.right = 'initial'
+        }
+        return styles
       }
     }
   }

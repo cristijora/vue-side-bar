@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import SideBar from './index'
+import SideBar from './../src/index'
 import VueRouter from 'vue-router'
 
 Vue.use(SideBar)

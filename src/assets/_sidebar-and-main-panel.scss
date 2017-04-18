@@ -214,7 +214,7 @@
     }
 
     &:after{
-       @include line-gradient($black-color-top, rgba($black-color-bottom,.7));
+       //@include line-gradient($black-color-top, rgba($black-color-bottom,.7));
        z-index: 3;
        opacity: 1;
     }

@@ -1,14 +1,14 @@
 <template>
-  <li :class="{active:active}" @click="onClick">
+  <li :class="{active:active}">
     <slot name="link">
-      <a href="#">
+      <a @click="onClick">
         <i :class="icon"></i>
         <p>{{title}}
-         <b v-if="multi" class="caret"></b>
+          <b v-if="menu" class="caret"></b>
         </p>
       </a>
     </slot>
-    <div v-if="multi" :class="{collapse:toggle}">
+    <div v-if="menu" :class="{collapse:toggle}">
       <ul class="nav">
         <slot></slot>
       </ul>
@@ -17,11 +17,11 @@
 </template>
 <script>
   export default{
-    name: 'side-link',
+    name: 'sidebar-item',
     props: {
       active: Boolean,
       icon: String,
-      multi: Boolean,
+      menu: Boolean,
       title: {
         type: String,
         default: 'Simple link'
@@ -29,12 +29,12 @@
     },
     data () {
       return {
-        toggle: false
+        toggle: true
       }
     },
     methods: {
       onClick () {
-        if (this.multi) {
+        if (this.menu) {
           this.toggle = !this.toggle
         }
       }

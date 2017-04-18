@@ -1,10 +1,10 @@
 module.exports = {
 
   VueSideBar: require('./components/VueSideBar.vue'),
-  SideLink: require('./components/SideLink.vue'),
+  SidebarItem: require('./components/SidebarItem.vue'),
 
   install (Vue) {
     Vue.component('vue-side-bar', module.exports.VueSideBar)
-    Vue.component('side-link', module.exports.SideLink)
+    Vue.component('sidebar-item', module.exports.SidebarItem)
   }
 }
