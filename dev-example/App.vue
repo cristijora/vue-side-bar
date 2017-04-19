@@ -1,21 +1,52 @@
 <template>
-  <div>
+  <div style="position:relative; height:100vh;">
     <vue-side-bar :minimize="sidebarClosed">
 
-      <sidebar-item :menu="true" title="Menu with links" :active="true">
+      <sidebar-item :menu="true"
+                    title="Menu with links"
+                    :active="true"
+                    icon="ti-bag"
+                    menu-transition="slide-fade">
         <sidebar-item title="First link" @click.native="firstLinkClick"/>
         <sidebar-item title="Second link"/>
         <sidebar-item title="Third link"/>
       </sidebar-item>
 
+      <sidebar-item :menu="true"
+                    title="Menu with links"
+                    :active="true"
+                    icon="ti-bag"
+                    menu-transition="slide-fade">
+        <sidebar-item title="First link" @click.native="firstLinkClick"/>
+        <sidebar-item title="Second link"/>
+        <sidebar-item title="Third link"/>
+      </sidebar-item>
+      <sidebar-item :menu="true"
+                    title="Menu with links"
+                    :active="true"
+                    icon="ti-bag"
+                    menu-transition="slide-fade">
+        <sidebar-item title="First link" @click.native="firstLinkClick"/>
+        <sidebar-item title="Second link"/>
+        <sidebar-item title="Third link"/>
+      </sidebar-item>
+      <sidebar-item :menu="true"
+                    title="Menu with links"
+                    :active="true"
+                    icon="ti-bag"
+                    menu-transition="slide-fade">
+        <sidebar-item title="First link" @click.native="firstLinkClick"/>
+        <sidebar-item title="Second link"/>
+        <sidebar-item title="Third link"/>
+      </sidebar-item>
       <sidebar-item title="Hey there">
 
       </sidebar-item>
 
     </vue-side-bar>
 
-    <div class="content">
-      <button class="btn" style="margin-left:300px;" @click="toggleSideBar">Toggle sidebar</button>
+    <div class="content" style="height:200vh; float:right;">
+      <button class="btn" @click="toggleSideBar">Toggle sidebar</button>
     </div>
   </div>
 </template>
