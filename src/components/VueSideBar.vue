@@ -58,8 +58,13 @@
         return styles
       },
       sidebarMiniTitle () {
-        var matches = this.title.match(/\b(\w)/g)
-        return matches.join('').toUpperCase()
+        return this.firstLetterFromWords(this.title)
+      }
+    },
+    methods: {
+      firstLetterFromWords (sentence) {
+        var firstWordsLetter = sentence.match(/\b(\w)/g)
+        return firstWordsLetter.join('').toUpperCase()
       }
     }
   }
