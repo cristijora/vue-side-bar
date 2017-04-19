@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-side-bar>
+    <vue-side-bar :minimize="sidebarClosed">
 
       <sidebar-item :menu="true" title="Menu with links" :active="true">
         <sidebar-item title="First link" @click.native="firstLinkClick"/>
@@ -14,16 +14,26 @@
 
     </vue-side-bar>
 
-    <router-view style="text-align: center"></router-view>
+    <div class="content">
+      <button class="btn" style="margin-left:300px;" @click="toggleSideBar">Toggle sidebar</button>
+    </div>
   </div>
 </template>
 
 <script>
   export default {
     name: 'app',
+    data () {
+      return {
+        sidebarClosed: false
+      }
+    },
     methods: {
       firstLinkClick () {
         alert('Hey you clicked me!')
+      },
+      toggleSideBar () {
+        this.sidebarClosed = !this.sidebarClosed
       }
     }
   }
