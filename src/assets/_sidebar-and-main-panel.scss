@@ -11,8 +11,6 @@
     display: block;
     z-index: 1;
     color: #fff;
-    font-weight: 200;
-
 
     .sidebar-wrapper{
         position: relative;
@@ -141,23 +139,6 @@
             overflow: hidden;
         }
 
-        .logo-image{
-            float: left;
-            height: 40px;
-            width: 40px;
-            margin: 0 10px;
-        }
-
-        .logo-round{
-            border-radius: 50%;
-            display: block;
-            overflow: hidden;
-
-            img{
-                width: 100%;
-            }
-        }
-
         &:before{
             content: "";
             position: absolute;
@@ -168,35 +149,6 @@
             background-color: rgba($white-color, 0.3);
         }
 
-    }
-
-    .user{
-        border-bottom: 1px solid rgba($white-color, 0.20);
-        padding-bottom: 20px;
-        margin-top: 20px;
-
-        .photo{
-            width: 80px;
-            height: 80px;
-            overflow: hidden;
-            border-radius: 50%;
-            border: 4px solid rgba($white-color, .3);
-            margin: 0 auto;
-            @extend .animation-transition-general;
-
-            img{
-                width: 100%;
-            }
-        }
-
-        a{
-            text-align: center;
-            color: $white-color;
-            padding: $padding-base-vertical $padding-large-vertical;
-            text-align: center;
-            display: block;
-            @extend .animation-transition-general;
-        }
     }
 
     &:after,
@@ -278,9 +230,10 @@
 .sidebar,
 .main-panel,
 .sidebar-wrapper,
+.sidebar-main-content,
 .navbar-fixed{
-    -webkit-transition-property: top,bottom,width;
-    transition-property: top,bottom, width;
+    -webkit-transition-property: top,bottom,width,margin-left;
+    transition-property: top,bottom, width,margin-left;
     -webkit-transition-duration: .2s,.2s, .35s;
     transition-duration: .2s,.2s, .35s;
     -webkit-transition-timing-function: linear,linear,ease;

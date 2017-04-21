@@ -1,6 +1,6 @@
 <template>
   <div style="position:relative; height:100vh;">
-    <vue-side-bar :minimize="sidebarClosed">
+    <vue-side-bar :minimize="sidebarClosed" position="right">
 
       <sidebar-item :menu="true"
                     title="Menu with links"
@@ -42,12 +42,12 @@
       <sidebar-item title="Hey there">
 
       </sidebar-item>
+      <sidebar-main-content slot="content">
+        <button class="btn pull-right" @click="toggleSideBar">Toggle sidebar</button>
+      </sidebar-main-content>
 
     </vue-side-bar>
 
-    <div class="content" style="height:200vh; float:right;">
-      <button class="btn" @click="toggleSideBar">Toggle sidebar</button>
-    </div>
   </div>
 </template>
 

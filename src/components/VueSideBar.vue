@@ -1,29 +1,28 @@
 <template>
   <div :class="{'sidebar-mini':minimize}">
-    <div class="sidebar" :style="sideBarStyle">
-      <div class="logo">
-        <a href="#" class="logo-text">
-          {{title}}
+    <div class="sidebar" :style="sideBarStyle" ref="sidebar">
+      <slot name="title">
+        <div class="logo">
+          <a href="#" class="logo-text">
+            {{title}}
         </a>
-      </div>
-      <div class="logo logo-mini">
-        <a href="#" class="logo-text">
-          {{sidebarMiniTitle}}
+        </div>
+        <div class="logo logo-mini">
+          <a href="#" class="logo-text">
+            {{sidebarMiniTitle}}
         </a>
-      </div>
-
+        </div>
+      </slot>
       <div class="sidebar-wrapper">
-        <!-- <div class="user">
-           <div class="photo">
-           </div>
-         </div>-->
-
         <ul class="nav">
           <slot>
           </slot>
         </ul>
       </div>
     </div>
+    <slot name="content">
+
+    </slot>
   </div>
 </template>
 <script>
@@ -42,6 +41,11 @@
         default: 'left'
       },
       minimize: Boolean
+    },
+    data () {
+      return {
+        content: null
+      }
     },
     computed: {
       sideBarStyle () {
@@ -65,6 +69,23 @@
       firstLetterFromWords (sentence) {
         var firstWordsLetter = sentence.match(/\b(\w)/g)
         return firstWordsLetter.join('').toUpperCase()
+      }
+    },
+    mounted () {
+      var sidebarDiv = this.$refs.sidebar
+      this.content = this.$children.find(el => el.$options.name === 'sidebar-main-content')
+      sidebarDiv.addEventListener('transitionend', (event) => {
+        var marginType = this.position === 'left' ? 'marginLeft' : 'marginRight'
+        this.content.contentStyle[marginType] = `${sidebarDiv.clientWidth}px`
+      }, true)
+    },
+    watch: {
+      minimize: function (newVal, oldVal) {
+        if (this.content) {
+          var sidebarDiv = this.$refs.sidebar
+          var marginType = this.position === 'left' ? 'marginLeft' : 'marginRight'
+          this.content.contentStyle[marginType] = `${sidebarDiv.clientWidth}px`
+        }
       }
     }
   }
