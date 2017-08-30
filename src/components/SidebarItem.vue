@@ -1,27 +1,41 @@
 <template>
   <li :class="{active:active}">
     <slot name="link">
-      <a @click="onClick" :class="{'sub-item' : isSubLink}">
+      <a @click="onClick"
+         data-toggle="collapse"
+         :class="{'sub-item' : isSubLink}"
+         v-show="isMenu || !isSubMenu">
         <i :class="icon"></i>
         <p>{{title}}
-          <b v-if="menu" class="caret"></b>
+          <b v-show="isMenu" class="caret"></b>
         </p>
       </a>
+      <a v-if="!isMenu && isSubMenu" data-toggle="collapse">
+        <span class="sidebar-mini">{{firstLetterFromWords(title)}}</span>
+        <span class="sidebar-normal">{{title}}</span>
+      </a>
     </slot>
-    <transition :name="menuTransition">
-      <ul class="nav" v-if="menu && toggle" :class="{menu:toggle}">
-        <slot></slot>
-      </ul>
-    </transition>
+    <collapse-transition>
+      <div v-show="isMenu && toggle">
+        <ul class="nav">
+          <slot></slot>
+        </ul>
+      </div>
+    </collapse-transition>
   </li>
 </template>
 <script>
+  import CollapseTransition from '../transitions/collapse-transition'
+  import slotChildren from '../mixins/slotChildren'
   export default{
     name: 'sidebar-item',
+    mixins: [slotChildren],
+    components: {
+      CollapseTransition
+    },
     props: {
       active: Boolean,
       icon: String,
-      menu: Boolean,
       menuTransition: {
         type: String,
         default: ''
@@ -32,6 +46,12 @@
       }
     },
     computed: {
+      isMenu () {
+        return this.childrenComponents.length > 0
+      },
+      isSubMenu () {
+        return this.$parent.$options.name === 'sidebar-item'
+      },
       isSubLink () {
         const parent = this.$parent
         if (parent && parent.$options) {
@@ -48,30 +68,31 @@
     },
     methods: {
       onClick () {
-        if (this.menu) {
+        if (this.isMenu) {
           this.toggle = !this.toggle
         }
+      },
+      firstLetterFromWords (sentence) {
+        const firstWordsLetter = sentence.match(/\b(\w)/g)
+        return firstWordsLetter.join('').toUpperCase()
       }
+    },
+    mounted () {
+      this.$parent.addChild(this)
+    },
+    destroyed () {
+      if (this.$el && this.$el.parentNode) {
+        this.$el.parentNode.removeChild(this.$el)
+      }
+      this.$parent.removeChild(this)
     }
   }
 </script>
 <style>
-  /* Enter and leave animations can use different */
-  /* durations and timing functions.              */
-  .slide-fade-enter-active {
-    transition: all .3s ease;
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
   }
-
-  .slide-fade-leave-active {
-    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0
   }
-
-  .slide-fade-enter, .slide-fade-leave-to
-    /* .slide-fade-leave-active for <2.1.8 */
-  {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-
-
 </style>

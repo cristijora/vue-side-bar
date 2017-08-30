@@ -279,7 +279,8 @@ $bottombar-x:          bottombar-x !default;
 $bottombar-back:       bottombar-back !default;
 
 
-
+// Sidebar
+$sidebar-mini-width: calc(100% - 80px) !default;
 //== Media queries breakpoints
 //
 //## Define the breakpoints at which your layout will change, adapting to different screen sizes.
@@ -301,7 +302,7 @@ $screen-tablet:              $screen-sm-min !default;
 
 // Medium screen / desktop
 //** Deprecated `$screen-md` as of v3.0.1
-$screen-md:                  400px !default;
+$screen-md:                  992px !default;
 $screen-md-min:              $screen-md !default;
 //** Deprecated `$screen-desktop` as of v3.0.1
 $screen-desktop:             $screen-md-min !default;

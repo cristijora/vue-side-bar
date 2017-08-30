@@ -1,12 +1,17 @@
-module.exports = {
+import VueSideBar from './components/VueSideBar.vue'
+import SidebarItem from './components/SidebarItem.vue'
+import SideBarMainContent from './components/SidebarMainContent.vue'
 
-  VueSideBar: require('./components/VueSideBar.vue'),
-  SidebarItem: require('./components/SidebarItem.vue'),
-  SidebarMainContent: require('./components/SidebarMainContent.vue'),
-
+export default {
   install (Vue) {
-    Vue.component('vue-side-bar', module.exports.VueSideBar)
-    Vue.component('sidebar-item', module.exports.SidebarItem)
-    Vue.component('sidebar-main-content', module.exports.SidebarMainContent)
+    Vue.component('vue-side-bar', VueSideBar)
+    Vue.component('sidebar-item', SidebarItem)
+    Vue.component('sidebar-main-content', SideBarMainContent)
   }
+}
+
+export {
+  VueSideBar,
+  SidebarItem,
+  SideBarMainContent
 }

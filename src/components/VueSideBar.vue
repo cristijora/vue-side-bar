@@ -1,17 +1,18 @@
 <template>
   <div :class="{'sidebar-mini':minimize}">
-    <div class="sidebar" :style="sideBarStyle" ref="sidebar">
+    <div class="sidebar" :style="sideBarStyle" ref="sidebar" data-color="red">
       <slot name="title">
         <div class="logo">
-          <a href="#" class="logo-text">
+          <a href="#" class="simple-text logo-mini">
+            <div class="logo-img">
+              {{sidebarMiniTitle}}
+            </div>
+          </a>
+          <a href="#" class="simple-text logo-normal">
             {{title}}
-        </a>
+          </a>
         </div>
-        <div class="logo logo-mini">
-          <a href="#" class="logo-text">
-            {{sidebarMiniTitle}}
-        </a>
-        </div>
+
       </slot>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -21,12 +22,14 @@
       </div>
     </div>
     <slot name="content">
-
     </slot>
   </div>
 </template>
 <script>
+  import slotChildren from '../mixins/slotChildren'
   export default{
+    name: 'side-bar',
+    mixins: [slotChildren],
     props: {
       title: {
         type: String,
@@ -90,6 +93,5 @@
     }
   }
 </script>
-<style lang="scss">
-  @import "./../assets/sidebar-and-main-panel";
+<style>
 </style>

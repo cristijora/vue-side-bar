@@ -1,47 +1,37 @@
 <template>
-  <div style="position:relative; height:100vh;">
-    <vue-side-bar :minimize="sidebarClosed" position="right">
+  <div>
+    <vue-side-bar :minimize="sidebarClosed" position="left">
 
-      <sidebar-item :menu="true"
-                    title="Menu with links"
+      <sidebar-item title="Menu with links"
                     :active="true"
-                    icon="ti-bag"
-                    menu-transition="slide-fade">
+                    icon="ti-bag">
         <sidebar-item title="First link" @click.native="firstLinkClick"/>
         <sidebar-item title="Second link"/>
         <sidebar-item title="Third link"/>
       </sidebar-item>
 
-      <sidebar-item :menu="true"
-                    title="Menu with links"
+      <sidebar-item title="Menu with links"
                     :active="true"
-                    icon="ti-bag"
-                    menu-transition="slide-fade">
+                    icon="ti-bag">
         <sidebar-item title="First link" @click.native="firstLinkClick"/>
         <sidebar-item title="Second link"/>
         <sidebar-item title="Third link"/>
       </sidebar-item>
-      <sidebar-item :menu="true"
-                    title="Menu with links"
-                    :active="true"
-                    icon="ti-bag"
-                    menu-transition="slide-fade">
+      <sidebar-item title="Menu with links"
+                    icon="ti-bag">
         <sidebar-item title="First link" @click.native="firstLinkClick"/>
         <sidebar-item title="Second link"/>
         <sidebar-item title="Third link"/>
       </sidebar-item>
-      <sidebar-item :menu="true"
-                    title="Menu with links"
-                    :active="true"
-                    icon="ti-bag"
-                    menu-transition="slide-fade">
+      <sidebar-item title="Menu with links"
+                    icon="ti-bag">
         <sidebar-item title="First link" @click.native="firstLinkClick"/>
         <sidebar-item title="Second link"/>
         <sidebar-item title="Third link"/>
       </sidebar-item>
-      <sidebar-item title="Hey there">
+      <sidebar-item  icon="ti-bag" title="Hey there">
+      </sidebar-item>
 
-      </sidebar-item>
       <sidebar-main-content slot="content">
         <button class="btn pull-right" @click="toggleSideBar">Toggle sidebar</button>
       </sidebar-main-content>

@@ -1,0 +1,13 @@
+@import "./mixins";
+@import "./variables";
+.animation-transition-general{
+    @include transition($general-transition-time, $transition-linear);
+}
+
+.animation-transition-fast{
+    @include transition($fast-transition-time, $transition-linear);
+}
+
+.animation-transition-ultra-fast{
+    @include transition($ultra-fast-transition-time, $transition-ease-in);
+}
