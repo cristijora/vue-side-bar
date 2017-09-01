@@ -61,7 +61,7 @@
         return false
       },
       componentType () {
-        if (this.$attrs.to) {
+        if (this.$attrs && this.$attrs.to) {
           return 'router-link'
         }
         return 'a'
