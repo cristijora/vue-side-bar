@@ -1,6 +1,7 @@
 @import "variables";
 @import "mixins";
 @import "misc";
+@import "colors";
 @import "../base/base";
 .sidebar{
   position: absolute;
@@ -45,8 +46,7 @@
     .dropdown .dropdown-backdrop{
       display: none !important;
     }
-    .nav,
-    .user .info{
+    .nav{
       [data-toggle="collapse"] ~ div > ul > li > a{
         .sidebar-normal{
           margin: 0;
@@ -103,6 +103,7 @@
       margin-left: 23px;
       margin-right: 15px;
       position: relative;
+      opacity: 0;
     }
 
     a.logo-normal{
@@ -280,48 +281,6 @@
     }
   }
 
-  .user{
-    border-bottom: 1px solid rgba($white-color, 0.20);
-    padding-bottom: 20px;
-    margin-top: 20px;
-
-    .photo{
-      width: 34px;
-      height: 34px;
-      overflow: hidden;
-      border-radius: 50%;
-      float: left;
-      margin-right: 11px;
-      margin-left: 23px;
-      z-index: 5;
-      border: 2px solid rgba($white-color, .3);
-
-      img{
-        width: 100%;
-      }
-    }
-
-    a{
-      color: $white-color;
-      padding: $padding-base-vertical $padding-large-vertical;
-      display: block;
-      white-space: nowrap;
-    }
-    .info{
-      > a > span{
-        opacity: 1;
-        line-height: 20px;
-        display: block;
-        position: relative;
-      }
-      .caret{
-        position: absolute;
-        top: 11px;
-        right: 15px;
-      }
-    }
-  }
-
   &:after,
   &:before{
     display: block;
@@ -350,25 +309,6 @@
     opacity: .95;
   }
 
-  // colors for the sidebar with an image
-  &[data-color="blue"]:after{
-    @include line-gradient($color-blue, rgba($blue-color-bottom,.7));
-  }
-  &[data-color="azure"]:after{
-    @include line-gradient($color-azure, rgba($azure-color-bottom,.7));
-  }
-  &[data-color="green"]:after{
-    @include line-gradient($color-green, rgba($green-color-bottom,.7));
-  }
-  &[data-color="orange"]:after{
-    @include line-gradient($color-orange, rgba($orange-color-bottom,.7));
-  }
-  &[data-color="red"]:after{
-    @include line-gradient($color-red, rgba($red-color-bottom,.7));
-  }
-  &[data-color="purple"]:after{
-    @include line-gradient($color-purple, rgba($purple-color-bottom,.7));
-  }
 }
 
 
@@ -418,12 +358,8 @@
 }
 
 // windows os settings for perfect scrollbar off
-.sidebar .sidebar-wrapper,
-.main-panel{
-  .perfect-scrollbar-on &,
-  &{
-    overflow: hidden;
-  }
+.sidebar .sidebar-wrapper{
+    overflow-x: hidden;
 }
 
 // regular settings for perfect scrollbar off
@@ -510,6 +446,71 @@
           }
         }
       }
+    }
+  }
+}
+
+@media (max-width: $screen-md){
+
+  .main-panel{
+    @include transform-translate-x(0px);
+    @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+    left: 0;
+
+    width: 100%;
+  }
+
+  .sidebar,
+  .bootstrap-navbar {
+    position: fixed;
+    display: block;
+    top: 0;
+    height: 100%;
+    width: 260px;
+    right: 0;
+    left: auto;
+    z-index: 1032;
+    visibility: visible;
+    overflow-y: visible;
+    padding: 0;
+
+    @include transform-translate-x(260px);
+    @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+
+    .user{
+      .photo{
+        width: 50px;
+        height: 50px;
+        border-width: 2px;
+      }
+    }
+
+    .nav{
+      i{
+        font-size: $font-size-h4;
+      }
+      > li > a{
+        padding-bottom: 5px;
+        padding-top: 5px;
+        color: #FFFFFF !important;
+
+        &.dropdown-toggle{
+          background: transparent;
+        }
+      }
+    }
+
+  }
+
+  .nav-open{
+    .main-panel{
+      left: 0;
+      @include transform-translate-x(-260px);
+    }
+
+    .sidebar,
+    .bootstrap-navbar{
+      @include transform-translate-x(0px);
     }
   }
 }

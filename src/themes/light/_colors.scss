@@ -1,0 +1,23 @@
+@import "variables";
+@import "mixins";
+.sidebar{
+  // colors for the sidebar with an image
+  &[data-color="blue"]:after{
+    @include line-gradient($color-blue, rgba($blue-color-bottom,.7));
+  }
+  &[data-color="azure"]:after{
+    @include line-gradient($color-azure, rgba($azure-color-bottom,.7));
+  }
+  &[data-color="green"]:after{
+    @include line-gradient($color-green, rgba($green-color-bottom,.7));
+  }
+  &[data-color="orange"]:after{
+    @include line-gradient($color-orange, rgba($orange-color-bottom,.7));
+  }
+  &[data-color="red"]:after{
+    @include line-gradient($color-red, rgba($red-color-bottom,.7));
+  }
+  &[data-color="purple"]:after{
+    @include line-gradient($color-purple, rgba($purple-color-bottom,.7));
+  }
+}

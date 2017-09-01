@@ -1,42 +1,43 @@
 <template>
   <div>
-    <vue-side-bar :minimize="sidebarClosed" position="left">
+    <vue-side-bar :minimize="minimized"
+                  :mobile-menu-opened="mobileOpen"
+                  position="left"
+                  ref="sidebar">
+
+        <sidebar-item title="Menu with links"
+                      icon="ti-bag">
+          <sidebar-item to="/" title="First link"/>
+          <sidebar-item to="page2" title="Second link"/>
+          <sidebar-item to="/" title="Third link" />
+        </sidebar-item>
 
       <sidebar-item title="Menu with links"
-                    :active="true"
                     icon="ti-bag">
-        <sidebar-item title="First link" @click.native="firstLinkClick"/>
-        <sidebar-item title="Second link"/>
-        <sidebar-item title="Third link"/>
-      </sidebar-item>
-
-      <sidebar-item title="Menu with links"
-                    :active="true"
-                    icon="ti-bag">
-        <sidebar-item title="First link" @click.native="firstLinkClick"/>
-        <sidebar-item title="Second link"/>
-        <sidebar-item title="Third link"/>
+        <sidebar-item to="/" title="First link"/>
+        <sidebar-item to="page2" title="Second link"/>
+        <sidebar-item to="/" title="Third link" />
       </sidebar-item>
       <sidebar-item title="Menu with links"
                     icon="ti-bag">
-        <sidebar-item title="First link" @click.native="firstLinkClick"/>
-        <sidebar-item title="Second link"/>
-        <sidebar-item title="Third link"/>
-      </sidebar-item>
-      <sidebar-item title="Menu with links"
-                    icon="ti-bag">
-        <sidebar-item title="First link" @click.native="firstLinkClick"/>
-        <sidebar-item title="Second link"/>
-        <sidebar-item title="Third link"/>
-      </sidebar-item>
-      <sidebar-item  icon="ti-bag" title="Hey there">
+        <sidebar-item to="/" title="First link"/>
+        <sidebar-item to="page2" title="Second link"/>
+        <sidebar-item to="/" title="Third link" />
       </sidebar-item>
 
       <sidebar-main-content slot="content">
-        <button class="btn pull-right" @click="toggleSideBar">Toggle sidebar</button>
       </sidebar-main-content>
 
     </vue-side-bar>
+    <div class="main-panel">
+
+      <div>
+        <button class="btn" style="float:right;" @click="toggleSideBar">Minimize on desktop</button>
+        <button class="btn" style="float:right;" @click="openMobileMenu">Open mobile menu</button>
+      </div>
+      <router-view>
+      </router-view>
+    </div>
 
   </div>
 </template>
@@ -46,7 +47,8 @@
     name: 'app',
     data () {
       return {
-        sidebarClosed: false
+        minimized: false,
+        mobileOpen: false
       }
     },
     methods: {
@@ -54,35 +56,19 @@
         alert('Hey you clicked me!')
       },
       toggleSideBar () {
-        this.sidebarClosed = !this.sidebarClosed
+        this.minimized = !this.minimized
+      },
+      openMobileMenu () {
+        this.mobileOpen = !this.mobileOpen
       }
     }
   }
 </script>
 <style lang="scss">
-  $border-radius-extreme: 6px !default;
-  $white-color: white;
-  $gray-input-bg: #F3F2EE !default;
-  $card-black-color: #252422 !default;
+  .sidebar-open {
+    .main-panel{
 
-  body {
-    margin-top: 20px;
-    background-color: #ecf0f1;
-  }
-
-  .card-footer {
-    padding: 0px 20px;
-  }
-
-  .card {
-    border-radius: $border-radius-extreme;
-    box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
-    background-color: $white-color;
-    color: $card-black-color;
-    padding: 10px 0;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 1;
+    }
   }
 
 </style>

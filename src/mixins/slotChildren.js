@@ -7,6 +7,7 @@ export default {
   methods: {
     addChild (item) {
       const index = this.$slots.default.indexOf(item.$vnode)
+      item.menuTransition = this.menuTransition
       this.childrenComponents.splice(index, 0, item)
     },
     removeChild (item) {

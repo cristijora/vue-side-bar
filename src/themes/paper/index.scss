@@ -274,7 +274,7 @@
   }
 
   &,
-  &[data-background-color="white"]{
+  &[data-color="white"]{
     @include sidebar-background-color($white-background-color, $default-color);
 
     .user{
@@ -286,7 +286,7 @@
     }
   }
 
-  &[data-background-color="brown"]{
+  &[data-color="brown"]{
     @include sidebar-background-color($brown-background-color, $white-color);
 
     &[data-active-color="danger"]{

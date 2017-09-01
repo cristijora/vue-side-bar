@@ -1,7 +1,43 @@
 .collapse-transition {
-  transition: .25s height ease-out, .25s padding-top ease-in-out, .25s padding-bottom ease-in-out
+  transition: .25s height ease-in-out, .25s padding-top ease-in-out, .25s padding-bottom ease-in-out
 }
 
 .horizontal-collapse-transition {
   transition: .3s width ease-out, .3s padding-left ease-in-out, .3s padding-right ease-in-out
+}
+
+.sidebar {
+  a{
+    text-decoration: none;
+
+  }
+  ol, ul{
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  .nav{
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+  }
+  .nav>li{
+    position: relative;
+    display: block;
+  }
+  .nav>li>a{
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+  }
+  .nav>li>a:focus, .nav>li>a:hover{
+    text-decoration: none;
+  }
+  .menu-icon {
+    margin-top: 5px;
+    float:right;
+    transition: transform 0.3s;
+    &.down {
+      transform: rotate(180deg);
+    }
+  }
 }

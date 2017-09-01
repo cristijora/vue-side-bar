@@ -1,20 +1,19 @@
 <template>
-  <div :class="{'sidebar-mini':minimize}">
-    <div class="sidebar" :style="sideBarStyle" ref="sidebar" data-color="red">
+  <div>
+    <div class="sidebar" :data-color="color" :data-active-color="activeColor">
       <slot name="title">
-        <div class="logo">
+        <div class="logo" :title="title" :sidebarMiniTitle="sidebarMiniTitle">
           <a href="#" class="simple-text logo-mini">
             <div class="logo-img">
               {{sidebarMiniTitle}}
             </div>
           </a>
-          <a href="#" class="simple-text logo-normal">
+          <a class="simple-text logo-normal">
             {{title}}
           </a>
         </div>
-
       </slot>
-      <div class="sidebar-wrapper">
+      <div class="sidebar-wrapper" ref="sidebar">
         <ul class="nav">
           <slot>
           </slot>
@@ -27,7 +26,8 @@
 </template>
 <script>
   import slotChildren from '../mixins/slotChildren'
-  export default{
+
+  export default {
     name: 'side-bar',
     mixins: [slotChildren],
     props: {
@@ -37,17 +37,27 @@
       },
       color: {
         type: String,
-        default: '#7f8c8d'
+        default: 'red'
+      },
+      activeColor: {
+        type: String,
+        default: 'red'
       },
       position: {
         type: String,
         default: 'left'
       },
-      minimize: Boolean
+      menuTransition: {
+        type: String,
+        default: ''
+      },
+      minimize: Boolean,
+      mobileMenuOpened: Boolean
     },
     data () {
       return {
-        content: null
+        sideBarMiniClass: 'sidebar-mini',
+        mobileMenuClass: 'nav-open'
       }
     },
     computed: {
@@ -70,25 +80,24 @@
     },
     methods: {
       firstLetterFromWords (sentence) {
-        var firstWordsLetter = sentence.match(/\b(\w)/g)
+        const firstWordsLetter = sentence.match(/\b(\w)/g)
         return firstWordsLetter.join('').toUpperCase()
       }
     },
     mounted () {
-      var sidebarDiv = this.$refs.sidebar
-      this.content = this.$children.find(el => el.$options.name === 'sidebar-main-content')
-      sidebarDiv.addEventListener('transitionend', (event) => {
-        var marginType = this.position === 'left' ? 'marginLeft' : 'marginRight'
-        this.content.contentStyle[marginType] = `${sidebarDiv.clientWidth}px`
-      }, true)
+      if (this.minimize) {
+        document.body.classList.add(this.sideBarMiniClass)
+      }
+      if (this.mobileMenuOpened) {
+        document.body.classList.add(this.mobileMenuClass)
+      }
     },
     watch: {
-      minimize: function (newVal, oldVal) {
-        if (this.content) {
-          var sidebarDiv = this.$refs.sidebar
-          var marginType = this.position === 'left' ? 'marginLeft' : 'marginRight'
-          this.content.contentStyle[marginType] = `${sidebarDiv.clientWidth}px`
-        }
+      minimize () {
+        document.body.classList.toggle(this.sideBarMiniClass)
+      },
+      mobileMenuOpened () {
+        document.body.classList.toggle(this.mobileMenuClass)
       }
     }
   }

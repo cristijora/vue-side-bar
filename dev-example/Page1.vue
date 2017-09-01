@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div  style="float:right;">
     Firs page
   </div>
 </template>

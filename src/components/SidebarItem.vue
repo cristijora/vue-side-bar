@@ -1,45 +1,48 @@
 <template>
   <li :class="{active:active}">
-    <slot name="link">
-      <a @click="onClick"
+    <slot name="link" v-bind="menuProps">
+      <a @click="toggleMenu"
          data-toggle="collapse"
-         :class="{'sub-item' : isSubLink}"
+         :class="{'sub-item' : isSubMenu}"
          v-show="isMenu || !isSubMenu">
-        <i :class="icon"></i>
-        <p>{{title}}
-          <b v-show="isMenu" class="caret"></b>
+        <i v-if="icon" :class="icon"></i>
+        <p>
+          {{title}}
+          <chevron-down-icon width="16" height="16" v-if="isMenu" class="menu-icon" :class="{down: toggle}"></chevron-down-icon>
         </p>
       </a>
-      <a v-if="!isMenu && isSubMenu" data-toggle="collapse">
+      <component :is="componentType"
+                 v-bind="$attrs"
+                 v-on="$listeners"
+                 v-if="!isMenu && isSubMenu"
+                 data-toggle="collapse">
+        <i v-if="icon" :class="icon"></i>
         <span class="sidebar-mini">{{firstLetterFromWords(title)}}</span>
         <span class="sidebar-normal">{{title}}</span>
-      </a>
+      </component>
     </slot>
-    <collapse-transition>
+    <transition :name="menuTransition">
       <div v-show="isMenu && toggle">
         <ul class="nav">
-          <slot></slot>
+          <slot v-bind="menuProps"></slot>
         </ul>
       </div>
-    </collapse-transition>
+    </transition>
   </li>
 </template>
 <script>
-  import CollapseTransition from '../transitions/collapse-transition'
   import slotChildren from '../mixins/slotChildren'
-  export default{
+  import { ChevronDownIcon } from 'vue-feather-icons'
+  export default {
+    inheritAttrs: false,
     name: 'sidebar-item',
     mixins: [slotChildren],
     components: {
-      CollapseTransition
+      ChevronDownIcon
     },
     props: {
       active: Boolean,
       icon: String,
-      menuTransition: {
-        type: String,
-        default: ''
-      },
       title: {
         type: String,
         default: 'Simple link'
@@ -50,24 +53,38 @@
         return this.childrenComponents.length > 0
       },
       isSubMenu () {
-        return this.$parent.$options.name === 'sidebar-item'
-      },
-      isSubLink () {
         const parent = this.$parent
         if (parent && parent.$options) {
-          return parent.$options.name === 'sidebar-item'
+          let parentName = parent.$options.name
+          return parentName === 'sidebar-item'
         }
         return false
+      },
+      componentType () {
+        if (this.$attrs.to) {
+          return 'router-link'
+        }
+        return 'a'
+      },
+      menuProps () {
+        return {
+          isMenu: this.isMenu,
+          isSubMenu: this.isSubMenu,
+          toggleMenu: this.toggleMenu,
+          toggle: this.toggle,
+          menuTransition: this.menuTransition
+        }
       }
     },
     data () {
       return {
         toggle: false,
-        subItemClassName: 'sub-item'
+        subItemClassName: 'sub-item',
+        menuTransition: ''
       }
     },
     methods: {
-      onClick () {
+      toggleMenu () {
         if (this.isMenu) {
           this.toggle = !this.toggle
         }
@@ -78,21 +95,19 @@
       }
     },
     mounted () {
-      this.$parent.addChild(this)
+      if (this.$parent.addChild) {
+        this.$parent.addChild(this)
+      }
     },
     destroyed () {
       if (this.$el && this.$el.parentNode) {
         this.$el.parentNode.removeChild(this.$el)
       }
-      this.$parent.removeChild(this)
+      if (this.$parent.removeChild) {
+        this.$parent.removeChild(this)
+      }
     }
   }
 </script>
 <style>
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0
-  }
 </style>

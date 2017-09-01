@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div style="float:right;">
     Second page
-
   </div>
 </template>
 <script>

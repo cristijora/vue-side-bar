@@ -433,7 +433,7 @@ babel-helper-replace-supers@^6.24.1:
     babel-traverse "^6.24.1"
     babel-types "^6.24.1"
 
-babel-helper-vue-jsx-merge-props@^2.0.0:
+babel-helper-vue-jsx-merge-props@^2.0.0, babel-helper-vue-jsx-merge-props@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-2.0.2.tgz#aceb1c373588279e2755ea1cfd35c22394fd33f8"
 
@@ -5957,6 +5957,12 @@ vm-browserify@0.0.4:
 void-elements@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
+
+vue-feather-icons@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/vue-feather-icons/-/vue-feather-icons-0.1.1.tgz#360cefc2a8a6f99912e4b8f82d7fbc04056063c3"
+  dependencies:
+    babel-helper-vue-jsx-merge-props "^2.0.2"
 
 vue-hot-reload-api@^2.0.11:
   version "2.1.0"

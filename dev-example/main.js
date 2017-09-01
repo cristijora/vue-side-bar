@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import SideBar from './../src/index'
-import './../src/themes/light/index.scss'
+import './_sidebar-theme.scss'
 import VueRouter from 'vue-router'
 
 Vue.use(SideBar)
