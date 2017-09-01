@@ -2,7 +2,7 @@
 
 Vue side bar aims to simplify and make sidebars customizable by bringing reactive
 ## Demo
-[Basic demo](https://jsfiddle.net/CristiJ/b44cc4dq/11/) WIP
+[Basic demo](https://jsfiddle.net/b44cc4dq/373/) WIP
 ## Usage
 ```js
 Vue.use(VueSideBar)
@@ -10,7 +10,7 @@ Vue.use(VueSideBar)
 ```html
 <vue-side-bar>
 
-  <sidebar-item :menu="true" title="Menu with links" :active="true">
+  <sidebar-item title="Menu with links" :active="true">
     <sidebar-item title="First link" @click.native="firstLinkClick"/>
     <sidebar-item title="Second link"/>
     <sidebar-item title="Third link"/>
