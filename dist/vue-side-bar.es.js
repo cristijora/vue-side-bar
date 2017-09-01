@@ -195,7 +195,7 @@ var SideBarMainContent = { render: function render() {
   }
 };
 
-var index = {
+var SideBar = {
   install: function install(Vue) {
     Vue.component('vue-side-bar', VueSideBar);
     Vue.component('sidebar-item', SidebarItem);
@@ -203,5 +203,11 @@ var index = {
   }
 };
 
+// Automatic installation if Vue has been added to the global scope.
+if (typeof window !== 'undefined' && window.Vue) {
+  window.VueSideBar = SideBar;
+  window.Vue.use(SideBar);
+}
+
 export { VueSideBar, SidebarItem, SideBarMainContent };
-export default index;
+export default SideBar;

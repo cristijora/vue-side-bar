@@ -201,7 +201,7 @@ var SidebarItem = { render: function render() {
       return false;
     },
     componentType: function componentType() {
-      if (this.$attrs.to) {
+      if (this.$attrs && this.$attrs.to) {
         return 'router-link';
       }
       return 'a';
@@ -264,7 +264,7 @@ var SideBarMainContent = { render: function render() {
   }
 };
 
-var index = {
+var SideBar = {
   install: function install(Vue) {
     Vue.component('vue-side-bar', VueSideBar);
     Vue.component('sidebar-item', SidebarItem);
@@ -272,7 +272,13 @@ var index = {
   }
 };
 
-exports['default'] = index;
+// Automatic installation if Vue has been added to the global scope.
+if (typeof window !== 'undefined' && window.Vue) {
+  window.VueSideBar = SideBar;
+  window.Vue.use(SideBar);
+}
+
+exports['default'] = SideBar;
 exports.VueSideBar = VueSideBar;
 exports.SidebarItem = SidebarItem;
 exports.SideBarMainContent = SideBarMainContent;
