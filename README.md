@@ -2,7 +2,7 @@
 
 Vue side bar aims to simplify and make sidebars customizable by bringing reactive
 ## Demo
-[Basic demo](https://jsfiddle.net/b44cc4dq/373/) WIP
+[Basic demo](https://jsfiddle.net/b44cc4dq/407/) WIP
 ## Usage
 ```js
 Vue.use(VueSideBar)
